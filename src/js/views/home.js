@@ -1,15 +1,10 @@
 import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
+import background from "../../img/starwars_tatooine_sunset_bg.jpg"
+import { Link } from "react-router-dom";
 import "../../styles/home.css";
 
 export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
+	// <div className="background">
+		<img className="background" src={background} style={{ width: "100%", height: "100%"}}/>
+	// </div>
 );

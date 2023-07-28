@@ -1,44 +1,71 @@
+const URL_FETCH = "https://swapi.tech/api";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			characters: [],
+			selectCharacter: [],
+			planets: [],
+			selectPlanet: [],
+			films: [],
+			selectFilm: [],
+			ships: [],
+			favorites: [],
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getCharacters: async () => {
+				try {
+					const response = await fetch(
+						`${URL_FETCH}/people`, {
+							method: "GET",
+							ContentType: "application/json",
+						}
+					);
+				const data = await response.json();
+				setStore({ characters: data.results })
+				return data;
+				} catch (error) {
+					console.log("There was a problem with the fetch" + error);
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+
+			getCharacter: (people) => { setStore({ selectCharacter: people, }); },
+
+			getPlanets: async () => {
+				try {
+					const response = await fetch(
+						`${URL_FETCH}/planets`, {
+							method: "GET",
+							ContentType: "application/json",
+						}
+					);
+					const data = await response.json();
+					setStore({ planets: data.results })
+					return data;
+				} catch (error) {
+					console.log("There was a problem with the fetch" + error);
+				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			getPlanet: (planet) => { setStore({ selectPlanet: planet, }); },
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
+			getFilms: async () => {
+				try {
+					const response = await fetch(
+						`${URL_FETCH}/films`, {
+							method: "GET",
+							ContentType: "application/json",
+						}
+					);
+					const data = await response.json();
+					setStore({ films: data.results })
+					return data;
+				} catch (error) {
+					console.log("There was a problem with the fetch" + error);
+				}
+			},
+
+			getFilm: (film) => { setStore({ selectFilm: film, }); },
+		},
 	};
 };
 
