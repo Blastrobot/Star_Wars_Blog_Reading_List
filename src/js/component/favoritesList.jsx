@@ -6,8 +6,8 @@ export const FavoritesList = () => {
     const { store, actions } = useContext(Context);
     const favorites = store.favorites;
 
-    const handleDeleteFav = (name, id) => {
-        actions.deleteFav(name, id);
+    const removeFavorites = (id) => {
+        actions.deleteFav(id);
     };
     
     return (
@@ -20,12 +20,12 @@ export const FavoritesList = () => {
                     <li className="dropdown-item">Add some favorites! 😍</li>
                 )}
                 {favorites.map((favorites, i) => (
-                    <li key={i}>
-                        <Link to={`/details/${favorites.id}`} className="dropdown-item align-items-center">
+                    <li key={i} className="d-flex dropdown-item">
+                        <Link to={`/${favorites.type}/${favorites.id}`} className="dropdown-item align-items-center">
                             {favorites.name}
                         </Link>
-                        <button className="btn btn-link" type="submit" onClick={() => handleDeleteFav(favorites.name, favorites.id)}>
-                            Remove
+                        <button className="btn btn-link" type="submit" onClick={() => removeFavorites(favorites.id)}>
+                            ❌
                         </button>
                     </li>
                 ))}

@@ -16,7 +16,8 @@ export const CharactersCard = ({id, name}) => {
     };
 
     const handleAddToFav = () => {
-        actions.addFav({ id, name })
+        const item = { id: id, name: name, type: "character" };
+        actions.addFav(item);
     }
 
     return (
