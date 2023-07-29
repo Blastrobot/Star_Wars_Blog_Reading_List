@@ -15,9 +15,24 @@ export const CharactersCard = ({id, name}) => {
         actions.getCharacter(id);
     };
 
-    const handleAddToFav = () => {
-        const item = { id: id, name: name, type: "character" };
-        actions.addFav(item);
+    // const handleAddToFav = () => {
+    //     const item = { id: id, name: name, type: "character" };
+    //     actions.addFav(item);
+    // }
+
+    // const isFav = store.favorites.some(fav => fav.id === id);
+
+    const [isFav, setIsFav] = useState(false);
+
+    const toggleFav = () => {
+        const isFav = store.favorites.some(fav => fav.id === id);
+        if (isFav) {
+            actions.deleteFav(id);
+        } else {
+            const item = { id: id, name: name, type: "character" };
+            actions.addFav(item)
+        }
+        setIsFav(prevIsFav => !prevIsFav);
     }
 
     return (
@@ -30,8 +45,8 @@ export const CharactersCard = ({id, name}) => {
                         <Link to={`/character/${id}`} className="btn btn-outline-info" onClick={toDetails}>
                             Details
                         </Link>
-                        <button className="btn btn-light">
-                            <i className="far fa-heart" style={{color: "#ff0000"}} onClick={() => handleAddToFav(id, name)}/>
+                        <button className="btn btn-light" onClick={toggleFav}>
+                            <i className={isFav ? "fas fa-heart" : "far fa-heart"} style={{color: "#ff0000"}}/>
                         </button>
                     </div>
                 </div>
