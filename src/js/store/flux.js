@@ -121,8 +121,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addFav: (item) => {
 				const store = getStore();
-				const updatedFavs = [...store.favorites, item];
-				setStore({ favorites: updatedFavs });
+				const isDuplicate = store.favorites.some(fav => fav.id === item.id);
+				if (!isDuplicate) {
+					const updatedFavs = [...store.favorites, item];
+					setStore({ favorites: updatedFavs });
+				}
 			},
 
 			deleteFav: (id) => {
