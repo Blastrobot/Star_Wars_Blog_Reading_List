@@ -15,6 +15,10 @@ export const CharactersCard = ({id, name}) => {
         actions.getCharacter(id);
     };
 
+    const handleAddToFav = () => {
+        actions.addFav({ id, name })
+    }
+
     return (
         <div className="col-md-4 mb-4">
             <div className="card">
@@ -26,7 +30,7 @@ export const CharactersCard = ({id, name}) => {
                             Details
                         </Link>
                         <button className="btn btn-light">
-                            <i className="far fa-heart" style={{color: "#ff0000"}} onClick={toDetails}/>
+                            <i className="far fa-heart" style={{color: "#ff0000"}} onClick={() => handleAddToFav(id, name)}/>
                         </button>
                     </div>
                 </div>

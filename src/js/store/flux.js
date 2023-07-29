@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			planets: [],
 			selectPlanet: [],
 			films: [],
-			selectFilm: null,
+			selectFilm: [],
 			ships: [],
 			favorites: [],
 		},
@@ -118,6 +118,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("There was a problem with the single film fetch" + error);
 				}
 			},
+
+			addFav: (item) => {
+				const store = getStore();
+				const updatedFavs = [...store.favorites, item];
+				setStore({ favorites: updatedFavs });
+			},
+
+			deleteFav: (id) => {
+				const store = getStore();
+				const updatedFavs = store.favorites.filter(item => item.id !== id);
+				setStore({ favorites: updatedFavs });
+			}
 		},
 	};
 };

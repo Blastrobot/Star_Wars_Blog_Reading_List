@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FavoritesList } from "./favoritesList.jsx";
 
 export const Navbar = () => {
 	return (
@@ -22,17 +23,8 @@ export const Navbar = () => {
 						<li className="nav-item">
 							<Link to="/films" className="nav-link text-light">Films</Link>
 						</li>
-						<li className="nav-item dropdown">
-							<a className="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Favorites
-							</a>
-							<ul className="dropdown-menu">
-								<li><a className="dropdown-item" href="#">Action</a></li>
-								<li><a className="dropdown-item" href="#">Another action</a></li>
-								<li><hr className="dropdown-divider" /></li>
-								<li><a className="dropdown-item" href="#">Something else here</a></li>
-							</ul>
-						</li>
+						<FavoritesList/>
+						
 					</ul>
 					{/* <form className="d-flex" role="search">
 						<input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
