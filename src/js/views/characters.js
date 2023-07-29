@@ -9,14 +9,29 @@ export const Characters = () => {
     useEffect(() => {
         actions.getCharacters();
     }, []);
+
+    const handleNextPage = async () => {
+        if (store.next) {
+            actions.getCharacters(store.next)
+        }
+    }
     
+    const extractIDFromURL = (url) => {
+        const regex = /\/(\d+)\/$/;
+        const matches = url.match(regex);
+        return matches ? matches[1] : null;
+    }
+
     return(
         <div className="container">
             <h1>Characters</h1>
             <div className="row">
-                {characters.map((e, i) => (
-                    <CharactersCard key={i} id={i+1} name={e.name} gender={e.gender}/>
+                {characters.map((character) => (
+                    <CharactersCard key={character.url} id={extractIDFromURL(character.url)} name={character.name} gender={character.gender}/>
                 ))}
+                {store.next && (
+                    <button className="btn btn-primary" onClick={handleNextPage}>More characters</button>
+                )}
             </div>
         </div>
     )

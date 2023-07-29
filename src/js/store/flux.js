@@ -8,21 +8,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 			selectPlanet: [],
 			films: [],
 			selectFilm: [],
-			ships: [],
+			next: "",
+			prev: [],
 			favorites: [],
 		},
 		actions: {
-			getCharacters: async () => {
+			// fetchData: async (url) => {
+			// 	try {
+			// 		const response = await fetch(url, {
+			// 			method: "GET",
+			// 			ContentType: "application/json",
+			// 		});
+			// 		const data = await response.json();
+			// 		setStore({ next: data.next, prev: data.previous, characters: data.results, planets: data.results, films: data.results })
+			// 		return data;
+			// 	} catch (error) {
+			// 		console.log("There was a problem fetching next data: ", error);
+			// 	}
+			// },
+
+			getCharacters: async (nextURL = null) => {
 				const store = getStore();
+				const url = nextURL || `${URL_FETCH}/people`;
 				try {
 					const response = await fetch(
-						`${URL_FETCH}/people`, {
+						url, {
 							method: "GET",
 							ContentType: "application/json",
 						}
 					);
 				const data = await response.json();
-				setStore({ characters: data.results })
+				setStore({ characters: data.results, next: data.next })
 				return data;
 				} catch (error) {
 					console.log("There was a problem with the fetch" + error);

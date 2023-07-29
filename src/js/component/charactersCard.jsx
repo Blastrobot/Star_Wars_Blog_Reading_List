@@ -15,13 +15,6 @@ export const CharactersCard = ({id, name}) => {
         actions.getCharacter(id);
     };
 
-    // const handleAddToFav = () => {
-    //     const item = { id: id, name: name, type: "character" };
-    //     actions.addFav(item);
-    // }
-
-    // const isFav = store.favorites.some(fav => fav.id === id);
-
     const [isFav, setIsFav] = useState(false);
 
     const toggleFav = () => {
