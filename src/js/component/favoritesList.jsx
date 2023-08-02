@@ -25,7 +25,7 @@ export const FavoritesList = () => {
                             {favorites.name}
                         </Link>
                         <button className="btn btn-link" type="submit" onClick={() => removeFavorites(favorites.id)}>
-                            ❌
+                            🗑
                         </button>
                     </li>
                 ))}
